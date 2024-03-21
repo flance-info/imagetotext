@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Screenshot to GPT test",
-  "version": "2.0",
+  "version": "3.0",
   "description": "Take a screenshot and send it to GPT for analysis.",
   "permissions": [
     "tabs",
