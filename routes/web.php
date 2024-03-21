@@ -30,45 +30,46 @@ Route::get('/chatbot-action', 'App\Http\Controllers\ChatbotActionController@getL
 Route::get('/openapi', function () {
     $specification = [
         "openapi" => "3.0.0",
-        "info" => [
-            "title" => "ChatGPT Image Action API",
+        "info"    => [
+            "title"       => "ChatGPT Image Action API",
             "description" => "API for retrieving actions and data related to the last image in storage.",
-            "version" => "1.0.0"
+            "version"     => "1.0.0"
         ],
         "servers" => [
             [
-                "url" => "https://5ab4-213-230-114-19.ngrok-free.app",
+                "url"         => "https://5ab4-213-230-114-19.ngrok-free.app/",
                 "description" => "Main API server"
             ]
         ],
-        "paths" => [
+        "paths"   => [
             "/chatbot-action" => [
                 "get" => [
-                    "summary" => "Retrieve the last image action",
+                    "summary"     => "Retrieve the last image action",
                     "description" => "Returns an action and URL for the last image in storage.",
-                    "responses" => [
+                    "operationId" => "getLastImageAction",
+                    "responses"   => [
                         "200" => [
                             "description" => "A successful response containing the action for the last image.",
-                            "content" => [
+                            "content"     => [
                                 "application/json" => [
                                     "schema" => [
-                                        "type" => "object",
+                                        "type"       => "object",
                                         "properties" => [
                                             "actions" => [
-                                                "type" => "array",
+                                                "type"  => "array",
                                                 "items" => [
-                                                    "type" => "object",
+                                                    "type"       => "object",
                                                     "properties" => [
                                                         "action" => [
-                                                            "type" => "string",
+                                                            "type"    => "string",
                                                             "example" => "displayImage"
                                                         ],
-                                                        "data" => [
-                                                            "type" => "object",
+                                                        "data"   => [
+                                                            "type"       => "object",
                                                             "properties" => [
                                                                 "imageUrl" => [
-                                                                    "type" => "string",
-                                                                    "example" => "https://5ab4-213-230-114-19.ngrok-free.app/storage/images/last-image.png"
+                                                                    "type"    => "string",
+                                                                    "example" => "https://example.com/storage/images/last-image.png"
                                                                 ]
                                                             ]
                                                         ]
@@ -82,13 +83,13 @@ Route::get('/openapi', function () {
                         ],
                         "404" => [
                             "description" => "No image found in storage.",
-                            "content" => [
+                            "content"     => [
                                 "application/json" => [
                                     "schema" => [
-                                        "type" => "object",
+                                        "type"       => "object",
                                         "properties" => [
                                             "error" => [
-                                                "type" => "string",
+                                                "type"    => "string",
                                                 "example" => "No image found"
                                             ]
                                         ]
