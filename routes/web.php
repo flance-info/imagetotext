@@ -19,4 +19,3 @@ Route::get('/', function () {
 
 Route::post('/upload-screenshot', 'App\Http\Controllers\ScreenshotController@store');
 
-
