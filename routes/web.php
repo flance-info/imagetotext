@@ -20,6 +20,9 @@ Route::get('/', function () {
 });
 
 Route::post('/upload-screenshot', 'App\Http\Controllers\ScreenshotController@store');
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
 
 
 
@@ -37,7 +40,7 @@ Route::get('/openapi', function () {
         ],
         "servers" => [
             [
-                "url"         => "https://5ab4-213-230-114-19.ngrok-free.app/",
+                "url"         => "https://5ab4-213-230-114-19.ngrok-free.app",
                 "description" => "Main API server"
             ]
         ],
@@ -67,9 +70,9 @@ Route::get('/openapi', function () {
                                                         "data"   => [
                                                             "type"       => "object",
                                                             "properties" => [
-                                                                "imageUrl" => [
+                                                                "image" => [
                                                                     "type"    => "string",
-                                                                    "example" => "https://example.com/storage/images/last-image.png"
+                                                                    "example" => "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
                                                                 ]
                                                             ]
                                                         ]

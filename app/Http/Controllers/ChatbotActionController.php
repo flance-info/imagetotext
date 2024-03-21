@@ -23,11 +23,15 @@ class ChatbotActionController extends Controller {
         if ( empty( $lastImage ) ) {
             return response()->json( [ 'error' => 'No image found' ], 404 );
         }
+// Retrieve the image content
+        $imageContent = Storage::disk( 'public' )->get( $lastImage );
+        // Convert the image content to a base64-encoded string
+        $base64Image = base64_encode( $imageContent );
 
+        // Return the base64-encoded image in the response
         return response()->json( [
-            'last_image' => Storage::disk( 'public' )->url( $lastImage ),
+            "image" => "data:image/jpeg;base64," . $base64Image,
         ] );
-
     }
 }
 
