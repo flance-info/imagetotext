@@ -35,24 +35,28 @@ function captureVisibleTab() {
 }
 
 function sendScreenshotToGPT(dataUrl) {
-	downloadImage(dataUrl);
-	fetch('YOUR_GPT_API_ENDPOINT', {
-		method: 'POST',
-		body: JSON.stringify({screenshot: dataUrl}),
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-		.then(response => {
-			if (!response.ok) {
-				throw new Error('Failed to send screenshot to GPT');
-			}
-			console.log('Screenshot sent to GPT successfully');
-		})
-		.catch(error => {
-			console.error('Error sending screenshot to GPT:', error);
-		});
+    downloadImage(dataUrl);
+    fetch('http://localhost:8000/upload-screenshot', {
+        method: 'POST',
+        body: JSON.stringify({screenshot: dataUrl}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to send screenshot to Laravel');
+            }
+            return response.json(); // Assuming the Laravel endpoint returns JSON
+        })
+        .then(data => {
+            console.log('Screenshot sent to Laravel successfully', data);
+        })
+        .catch(error => {
+            console.error('Error sending screenshot to Laravel:', error);
+        });
 }
+
 
 function downloadImage(dataUrl) {
 	chrome.downloads.download({
