@@ -16,11 +16,25 @@ class ScreenshotController extends Controller {
         $fileName = 'screenshots/' . uniqid() . '.png';
         // Save the image
         Storage::disk( 'public' )->put( $fileName, $imageData );
+        // Extract text from the saved image using an OCR library or API
+        $extractedText = $this->extractTextFromImage( storage_path( 'app/public/' . $fileName ) );
         // Generate a URL to the saved image
         $url = Storage::url( $fileName );
+        // Send the extracted text to OpenAI for analysis
+        $response = $this->sendTextToOpenAI( $extractedText );
 
-        // Return the URL to the client
-        return response()->json( [ 'url' => $url ] );
+        // Return the OpenAI response to the client
+        return response()->json( [
+            'openai_response' => $response,
+            'url'             => $url
+        ] );
+
+    }
+
+    private function extractTextFromImage( $imagePath ) {
+        // Placeholder for OCR processing
+        // You need to replace this with actual OCR logic
+        return 'Extracted text from the image';
     }
 
     private function sendTextToOpenAI( $text ) {
@@ -37,7 +51,7 @@ class ScreenshotController extends Controller {
                 'max_tokens'  => 150,
             ],
         ] );
-        $body = json_decode( $response->getBody(), true );
+        $body     = json_decode( $response->getBody(), true );
 
         return $body['choices'][0]['text'];
     }
