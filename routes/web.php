@@ -34,50 +34,33 @@ Route::get('/openapi', function () {
     $specification = [
         "openapi" => "3.0.0",
         "info"    => [
-            "title"       => "ChatGPT Image Action API",
-            "description" => "API for retrieving actions and data related to the last image in storage.",
+            "title"       => "ChatGPT Text Action API",
+            "description" => "API for retrieving actions and data related to the last text in storage.",
             "version"     => "1.0.0"
         ],
         "servers" => [
             [
-                "url"         => "https://5ab4-213-230-114-19.ngrok-free.app",
+                "url"         => "https://one-aware-mole.ngrok-free.app",
                 "description" => "Main API server"
             ]
         ],
         "paths"   => [
             "/chatbot-action" => [
                 "get" => [
-                    "summary"     => "Retrieve the last image action",
-                    "description" => "Returns an action and URL for the last image in storage.",
-                    "operationId" => "getLastImageAction",
+                    "summary"     => "Retrieve the last text action",
+                    "description" => "Returns an action and the text for the last entry in storage.",
+                    "operationId" => "getLastTextAction",
                     "responses"   => [
                         "200" => [
-                            "description" => "A successful response containing the action for the last image.",
+                            "description" => "A successful response containing the text.",
                             "content"     => [
                                 "application/json" => [
                                     "schema" => [
                                         "type"       => "object",
                                         "properties" => [
-                                            "actions" => [
-                                                "type"  => "array",
-                                                "items" => [
-                                                    "type"       => "object",
-                                                    "properties" => [
-                                                        "action" => [
-                                                            "type"    => "string",
-                                                            "example" => "displayImage"
-                                                        ],
-                                                        "data"   => [
-                                                            "type"       => "object",
-                                                            "properties" => [
-                                                                "image" => [
-                                                                    "type"    => "string",
-                                                                    "example" => "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
-                                                                ]
-                                                            ]
-                                                        ]
-                                                    ]
-                                                ]
+                                            "text" => [
+                                                "type"    => "string",
+                                                "example" => "This is the text content retrieved from the last action."
                                             ]
                                         ]
                                     ]
@@ -85,7 +68,7 @@ Route::get('/openapi', function () {
                             ]
                         ],
                         "404" => [
-                            "description" => "No image found in storage.",
+                            "description" => "No text found in storage.",
                             "content"     => [
                                 "application/json" => [
                                     "schema" => [
@@ -93,7 +76,7 @@ Route::get('/openapi', function () {
                                         "properties" => [
                                             "error" => [
                                                 "type"    => "string",
-                                                "example" => "No image found"
+                                                "example" => "No text found"
                                             ]
                                         ]
                                     ]
@@ -106,8 +89,8 @@ Route::get('/openapi', function () {
         ]
     ];
 
-    return new Response($specification, 200, ['Content-Type' => 'application/json']);
-});
+    return new Response( $specification, 200, [ 'Content-Type' => 'application/json' ] );
+} );
 
 
 

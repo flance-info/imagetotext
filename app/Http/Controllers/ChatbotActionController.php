@@ -20,6 +20,7 @@ class ChatbotActionController extends Controller {
             return response()->json( [ 'error' => 'No image found' ], 404 );
         }
         $absolutePath = Storage::disk( 'public' )->path( $lastImage );
+
         // Call OCR and pass the absolute path to scan
         $text = \OCR::scan( $absolutePath );
 
