@@ -14,6 +14,7 @@ use Illuminate\Http\Response;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\LatestScreenshotController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -93,4 +94,6 @@ Route::get('/openapi', function () {
 } );
 
 
+
+Route::get('/latest-screenshot', [LatestScreenshotController::class, 'show']);
 
