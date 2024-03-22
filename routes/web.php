@@ -24,7 +24,7 @@ Route::get('/privacy', function () {
     return view('privacy');
 })->name('privacy');
 
-
+Route::get('/ocr', [App\Http\Controllers\OcrController::class, 'ocrImage']);
 
 
 Route::get('/chatbot-action', 'App\Http\Controllers\ChatbotActionController@getLastImage');
